@@ -40,7 +40,7 @@
   Object.defineProperty(window, 'console', {
     get: function() {
       if (devToolsOpen) {
-      alert("Vous avez ouvert les outils de développement. Veuillez les fermer pour continuer");
+        alert("Vous avez ouvert les outils de développement. Veuillez les fermer pour continuer");
       }
       return console;
     }
