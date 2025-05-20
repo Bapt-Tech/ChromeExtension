@@ -10,7 +10,7 @@
     const height = window.outerHeight - window.innerHeight > threshold;
     if (width || height) {
       devToolsOpen = true;
-      alert("Les outils de développement sont ouverts !");
+      alert("Vous avez ouvert les outils de développement. Veuillez les fermer pour continuer");
     } else {
       devToolsOpen = false;
     }
@@ -23,7 +23,7 @@
   const originalConsole = console.log;
   console.log = function() {
     if (devToolsOpen) {
-      alert("Tentative d'accès à la console détectée !");
+      alert("Vous avez ouvert les outils de développement. Veuillez les fermer pour continuer");
       // Peut aussi envoyer un message pour prévenir l'utilisateur.
     }
     originalConsole.apply(console, arguments);
@@ -40,7 +40,7 @@
   Object.defineProperty(window, 'console', {
     get: function() {
       if (devToolsOpen) {
-        alert("Accès à la console détecté !");
+      alert("Vous avez ouvert les outils de développement. Veuillez les fermer pour continuer");
       }
       return console;
     }
