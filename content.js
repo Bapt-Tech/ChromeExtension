@@ -1,9 +1,9 @@
 // content.js
 
 (function() {
-  // Détecte si les outils de développement sont ouverts via la taille de la fenêtre
   let devToolsOpen = false;
 
+  // Vérifie la taille de la fenêtre pour détecter les DevTools
   const checkDevTools = () => {
     const threshold = 160;
     const width = window.outerWidth - window.innerWidth > threshold;
@@ -16,23 +16,34 @@
     }
   };
 
-  // Vérification toutes les 100 ms
+  // Vérifie régulièrement si DevTools est ouvert
   setInterval(checkDevTools, 100);
 
-  // Bloquer certains raccourcis clavier (Ctrl + Shift + I, F12)
-  document.addEventListener('keydown', function(event) {
-    if ((event.ctrlKey && event.shiftKey && event.key === 'I') || event.key === 'F12') {
-      event.preventDefault();  // Empêche l'action de se produire
-      alert("Raccourci bloqué : Ouvrir les DevTools est désactivé.");
-    }
-  });
-
-  // Détecter un changement de la console
+  // Rendre plus difficile l'accès à la console
   const originalConsole = console.log;
   console.log = function() {
     if (devToolsOpen) {
       alert("Tentative d'accès à la console détectée !");
+      // Peut aussi envoyer un message pour prévenir l'utilisateur.
     }
     originalConsole.apply(console, arguments);
   };
+
+  // Ralentir l'exécution du script si les DevTools sont ouverts
+  setInterval(() => {
+    if (devToolsOpen) {
+      debugger;  // Si les DevTools sont ouverts, met en pause l'exécution du script
+    }
+  }, 1000);
+
+  // Autre approche : tenter de détecter la détection de la console
+  Object.defineProperty(window, 'console', {
+    get: function() {
+      if (devToolsOpen) {
+        alert("Accès à la console détecté !");
+      }
+      return console;
+    }
+  });
+
 })();
