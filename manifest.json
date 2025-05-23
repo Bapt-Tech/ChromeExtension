@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Block DevTools",
+  "name": "EscapeGame - Bapt-tech",
   "version": "1.1",
-  "description": "Extension pour bloquer l'ouverture des DevTools.",
+  "description": "Use with Escape Game (https://bapt-tech.github.io/EscapeGame)",
   "permissions": [
     "activeTab"
   ],
